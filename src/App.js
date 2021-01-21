@@ -1,23 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import Globe from "react-globe.gl";
+import Map from "./light-earth.png";
+import MapDark from "./earth-dark.jpg";
+import Countries from "./countries.json";
+import "./App.css";
+import { useState } from "react";
 
 function App() {
+  let [mapbg, setMapbg] = useState(Map);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button
+        onClick={() => {
+          setMapbg(Map);
+        }}
+      >
+        light
+      </button>
+      <button
+        onClick={() => {
+          setMapbg(MapDark);
+        }}
+      >
+        dark
+      </button>
+      <Globe
+        globeImageUrl={mapbg}
+        hexPolygonsData={Countries.features}
+        hexPolygonColor={() => "#f00"}
+        hexPolygonResolution={3}
+        hexPolygonAltitude={0}
+        hexPolygonMargin={0.1}
+      />
+      ,
     </div>
   );
 }
